@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Gank</string>
+    <string name="nav_daily">Today</string>
+    <string name="nav_type">Category</string>
+    <string name="nav_random">Luck</string>
+    <string name="nav_collect">Collection</string>
+    <string name="nav_setting">Setting</string>
+    <string name="nav_info">About</string>
+    <string name="nav_option">Option</string>
+</resources>

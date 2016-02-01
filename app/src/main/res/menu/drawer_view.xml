@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/app_name">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_daily"
+                    android:icon="@drawable/today"
+                    android:title="@string/nav_daily" />
+                <item
+                    android:id="@+id/nav_type"
+                    android:icon="@drawable/category"
+                    android:title="@string/nav_type" />
+                <item
+                    android:id="@+id/nav_random"
+                    android:icon="@drawable/today"
+                    android:title="@string/nav_random" />
+                <item
+                    android:id="@+id/nav_collect"
+                    android:icon="@drawable/today"
+                    android:title="@string/nav_collect" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/nav_option">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/category"
+                android:title="@string/nav_setting" />
+            <item
+                android:id="@+id/nav_info"
+                android:icon="@drawable/category"
+                android:title="@string/nav_info" />
+        </menu>
+    </item>
+
+</menu>
