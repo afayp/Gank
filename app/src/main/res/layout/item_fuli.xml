@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    android:id="@+id/card_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="2dp">
-    <ImageView
-        android:id="@+id/id_fuli_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="center"/>
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    card_view:cardCornerRadius="4dp"
+    android:background="@drawable/item_selector"
+    android:clickable="true">
 
-</FrameLayout>
+        <ImageView
+            android:src="@drawable/icon"
+            android:id="@+id/item_fuli_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            />
+
+
+
+</android.support.v7.widget.CardView>

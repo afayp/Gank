@@ -5,6 +5,7 @@ package com.app.pfh.gank.utils;
  */
 public class UrlUtils {
 
+    public static final String TAG = "Gank";
     //分类数据: http://gank.avosapps.com/api/data/数据类型/请求个数/第几页
     public static final String GANK_SERVER_IP = "http://gank.avosapps.com/api/data/";
 
@@ -20,6 +21,9 @@ public class UrlUtils {
     public static final String ANDROID = "Android/";
     public static final String IOS = "iOS/";
     public static final String fuli = "福利/";
+    public static final String releax = "休息视频/";
+    public static final String expand = "拓展资源/";
+    public static final String front = "前端/";
     public static final String ALL = "all/";
     //每次请求的个数
     public static final String NUM = "10/";

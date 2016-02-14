@@ -6,19 +6,15 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_daily"
-                    android:icon="@drawable/today"
+                    android:icon="@drawable/today_36dp"
                     android:title="@string/nav_daily" />
                 <item
                     android:id="@+id/nav_type"
-                    android:icon="@drawable/category"
+                    android:icon="@drawable/category_36dp"
                     android:title="@string/nav_type" />
                 <item
-                    android:id="@+id/nav_random"
-                    android:icon="@drawable/today"
-                    android:title="@string/nav_random" />
-                <item
                     android:id="@+id/nav_collect"
-                    android:icon="@drawable/today"
+                    android:icon="@drawable/collection_36dp"
                     android:title="@string/nav_collect" />
             </group>
         </menu>
@@ -28,11 +24,11 @@
         <menu>
             <item
                 android:id="@+id/nav_setting"
-                android:icon="@drawable/category"
+                android:icon="@drawable/setting_36dp"
                 android:title="@string/nav_setting" />
             <item
                 android:id="@+id/nav_info"
-                android:icon="@drawable/category"
+                android:icon="@drawable/info_36dp"
                 android:title="@string/nav_info" />
         </menu>
     </item>
