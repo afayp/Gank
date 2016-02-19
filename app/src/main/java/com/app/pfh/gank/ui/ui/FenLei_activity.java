@@ -118,7 +118,7 @@ public class FenLei_activity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         //设置左上角那个图标有用
         ActionBar ab = getSupportActionBar();
-//        ab.setHomeAsUpIndicator(R.drawable.ic_menu);自己设置那个图标，这里用默认的
+        ab.setHomeAsUpIndicator(R.mipmap.menu);//自己设置那个图标，这里用默认的
         ab.setDisplayHomeAsUpEnabled(true);
         //下面设置点击图标展开navigation
         ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle(this,
