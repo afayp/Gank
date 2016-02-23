@@ -3,10 +3,8 @@ package com.app.pfh.gank.model;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by Administrator on 2016/1/28.
- */
-public class Good{
+
+public class Good {
 
 //            "who":"Jason",
 //            "publishedAt":"2015-08-21T04:09:13.777Z",
@@ -26,6 +24,30 @@ public class Good{
     private String objectId;
     private String createdAt;
     private String updatedAt;
+
+    public Good() {
+    }
+
+    public Good(String who, String publishedAt, String desc, String type, String url, String objectId) {
+        this.who = who;
+        this.publishedAt = publishedAt;
+        this.desc = desc;
+        this.type = type;
+        this.url = url;
+        this.objectId = objectId;
+    }
+
+    public Good(String who, String publishedAt, String desc, String type, String url, boolean used, String objectId, String createdAt, String updatedAt) {
+        this.who = who;
+        this.publishedAt = publishedAt;
+        this.desc = desc;
+        this.type = type;
+        this.url = url;
+        this.used = used;
+        this.objectId = objectId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     public String getWho() {
         return who;
@@ -99,18 +121,18 @@ public class Good{
         this.updatedAt = updatedAt;
     }
 
-    @Override
-    public String toString() {
-        return "Good{" +
-                "who='" + who + '\'' +
-                ", publishedAt='" + publishedAt + '\'' +
-                ", desc='" + desc + '\'' +
-                ", type='" + type + '\'' +
-                ", url='" + url + '\'' +
-                ", used=" + used +
-                ", objectId='" + objectId + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Good{" +
+//                "who='" + who + '\'' +
+//                ", publishedAt='" + publishedAt + '\'' +
+//                ", desc='" + desc + '\'' +
+//                ", type='" + type + '\'' +
+//                ", url='" + url + '\'' +
+//                ", used=" + used +
+//                ", objectId='" + objectId + '\'' +
+//                ", createdAt='" + createdAt + '\'' +
+//                ", updatedAt='" + updatedAt + '\'' +
+//                '}';
+//    }
 }

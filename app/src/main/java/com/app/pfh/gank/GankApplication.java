@@ -32,8 +32,8 @@ public class GankApplication extends Application{
         context = getApplicationContext();
         requestQueue = Volley.newRequestQueue(context);
         initImageLoader(context);
-        RealmConfiguration configuration = new RealmConfiguration.Builder(context).name("Gank.realm").build();
-        Realm.setDefaultConfiguration(configuration);
+        RealmConfiguration config = new RealmConfiguration.Builder(getApplicationContext()).build();
+        Realm.setDefaultConfiguration(config);
     }
 
     private void initImageLoader(Context context) {

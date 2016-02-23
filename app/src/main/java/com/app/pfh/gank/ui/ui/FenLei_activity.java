@@ -139,7 +139,7 @@ public class FenLei_activity extends AppCompatActivity {
                 switch (item.getItemId()){
                     //待改进！
                     case R.id.nav_daily:
-                        Toast.makeText(FenLei_activity.this,"daily" ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(FenLei_activity.this,"daily功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_type:
                         Intent intent = new Intent(FenLei_activity.this, FenLei_activity.class);
@@ -148,10 +148,10 @@ public class FenLei_activity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_collect:
-                        Toast.makeText(FenLei_activity.this,"collect" ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(FenLei_activity.this,"collection功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_setting:
-                        Toast.makeText(FenLei_activity.this,"setting" ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(FenLei_activity.this,"setting功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_info:
                         showAboutWindow();
