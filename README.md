@@ -1,5 +1,6 @@
 # Gank.io客户端
 借助Gank.Io提供的API开发的一个客户端
+![](https://github.com/guodongxiaren/ImageCache/raw/master/Logo/foryou.gif)
 
 ![baidu](http://www.baidu.com/img/bdlogo.gif)
 ![image](https://github.com/afayp/Gank/s1.png)
