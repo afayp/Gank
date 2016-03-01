@@ -33,7 +33,7 @@ public class FuliFragment extends  BaseFragment{
     private LinearLayoutManager linearLayoutManager;
     private FuliAdapter fuliAdapter;
     private boolean isLoading;
-    private int mCurrentPage;
+    private int mCurrentPage = 1;
 
     @Override
     protected View initViews(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,9 +84,8 @@ public class FuliFragment extends  BaseFragment{
                 }
                 Intent intent = new Intent(mActivity, Fuli_viewer_activity.class);
                 intent.putExtra("urls",urls);
-                intent.putExtra("currItem",positon);
+                intent.putExtra("currItem", positon);
                 startActivity(intent);
-                Log.e(UrlUtils.TAG,"startActivity!"+urls[0]);
             }
         });
         return view;
@@ -103,13 +102,14 @@ public class FuliFragment extends  BaseFragment{
         loadData(mCurrentPage);
     }
 
-    private void loadData(int page) {
+    private void loadData(final int page) {
         mSwipeRefreshLayout.setRefreshing(true);
         if (HttpUtils.isConnected(mActivity)) {
+            Log.e(UrlUtils.TAG,"有网！");
             HttpUtils.get(UrlUtils.getFenLeiUrl(UrlUtils.fuli, page), new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    Log.e(UrlUtils.TAG, "加载json数据失败");
+                    Log.e(UrlUtils.TAG, "Fuli加载json数据失败"+"url:"+UrlUtils.getFenLeiUrl(UrlUtils.fuli, page)+"response:"+responseString);
                 }
 
                 @Override
@@ -121,6 +121,7 @@ public class FuliFragment extends  BaseFragment{
 
         } else {
             Toast.makeText(mActivity, "没有网络", Toast.LENGTH_SHORT);
+            Log.e(UrlUtils.TAG, "没有网！");
             //TODO 加载数据库里的数据
             mSwipeRefreshLayout.setRefreshing(false);
         }
@@ -137,7 +138,6 @@ public class FuliFragment extends  BaseFragment{
         FenLeiData fenLeiData = gson.fromJson(responseString, FenLeiData.class);
         List<Good> goodList = fenLeiData.getResults();
         //TODO　存到数据库
-
         fuliAdapter.addData(goodList);
         mSwipeRefreshLayout.setRefreshing(false);
 

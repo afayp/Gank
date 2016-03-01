@@ -28,7 +28,6 @@ public class Fuli_viewer_activity extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fuli);
-        Log.e(UrlUtils.TAG, "开始!");
         initData();
         initView();
     }
@@ -36,7 +35,6 @@ public class Fuli_viewer_activity extends AppCompatActivity{
     private void initData() {
         urls = getIntent().getStringArrayExtra("urls");
         positon = getIntent().getIntExtra("currItem", 1);
-        Log.e(UrlUtils.TAG, "拿到url!"+urls[0].toString());
 
     }
 

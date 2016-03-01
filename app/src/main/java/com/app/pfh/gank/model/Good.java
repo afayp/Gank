@@ -12,7 +12,7 @@ public class Good {
 //            "type":"Android",
 //            "url":"https://github.com/recruit-lifestyle/ColoringLoading",
 //            "used":true,
-//            "objectId":"55d5fd6b00b0af5bde3a9f82",
+//            "_id":"55d5fd6b00b0af5bde3a9f82",
 //            "createdAt":"2015-08-20T16:16:43.941Z",
 //            "updatedAt":"2015-08-21T04:09:14.358Z"
     private String who;
@@ -21,32 +21,48 @@ public class Good {
     private String type;
     private String url;
     private boolean used;
-    private String objectId;
+    private String _id;
     private String createdAt;
-    private String updatedAt;
+    private String _ns;
+    private String source;
+
+    public String get_ns() {
+        return _ns;
+    }
+
+    public void set_ns(String _ns) {
+        this._ns = _ns;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 
     public Good() {
     }
 
-    public Good(String who, String publishedAt, String desc, String type, String url, String objectId) {
+    public Good(String who, String publishedAt, String desc, String type, String url, String _id) {
         this.who = who;
         this.publishedAt = publishedAt;
         this.desc = desc;
         this.type = type;
         this.url = url;
-        this.objectId = objectId;
+        this._id = _id;
     }
 
-    public Good(String who, String publishedAt, String desc, String type, String url, boolean used, String objectId, String createdAt, String updatedAt) {
+    public Good(String who, String publishedAt, String desc, String type, String url, boolean used, String _id, String createdAt, String updatedAt) {
         this.who = who;
         this.publishedAt = publishedAt;
         this.desc = desc;
         this.type = type;
         this.url = url;
         this.used = used;
-        this.objectId = objectId;
+        this._id = _id;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
     }
 
     public String getWho() {
@@ -97,12 +113,12 @@ public class Good {
         this.used = used;
     }
 
-    public String getObjectId() {
-        return objectId;
+    public String get_id() {
+        return _id;
     }
 
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getCreatedAt() {
@@ -113,13 +129,6 @@ public class Good {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
 //    @Override
 //    public String toString() {
@@ -130,7 +139,7 @@ public class Good {
 //                ", type='" + type + '\'' +
 //                ", url='" + url + '\'' +
 //                ", used=" + used +
-//                ", objectId='" + objectId + '\'' +
+//                ", _id='" + _id + '\'' +
 //                ", createdAt='" + createdAt + '\'' +
 //                ", updatedAt='" + updatedAt + '\'' +
 //                '}';

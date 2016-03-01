@@ -33,7 +33,6 @@ public class FuliViewFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         url = getArguments().getString("url");
-        Log.e(UrlUtils.TAG, "fragment拿到url!"+url);
         imageLoader = ImageLoader.getInstance();
     }
 

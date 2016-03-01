@@ -16,7 +16,7 @@ public class UrlUtils {
     public static final String GANK_RANDOM_IP = "http://gank.avosapps.com/api/random/data/";
 
     //gank网址
-    public static final String GANK_URL = "http://gank.io/";
+    public static final String GANK_URL = "http://gank.io/api/data/";
 
     public static final String ANDROID = "Android/";
     public static final String IOS = "iOS/";
@@ -30,7 +30,7 @@ public class UrlUtils {
 
 
     public static String getFenLeiUrl(String type ,int page){
-        String url = GANK_SERVER_IP+type+NUM+page;
+        String url = GANK_URL+type+NUM+page;
         return url;
     }
 

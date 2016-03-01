@@ -130,14 +130,16 @@ public class CommonFragment extends BaseFragment {
     private void loadData(final int page) {
         mSwipeRefreshLayout.setRefreshing(true);
         if (HttpUtils.isConnected(mActivity)) {
+            Log.e(UrlUtils.TAG,"有网！");
             HttpUtils.get(UrlUtils.getFenLeiUrl(mType, page), new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    Log.e(UrlUtils.TAG, "加载json数据失败");
+                    Log.e(UrlUtils.TAG, mType +"-Common加载json数据失败"+"url:"+UrlUtils.getFenLeiUrl(mType, page)+" response:"+responseString);
                 }
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
+//                    Log.e(UrlUtils.TAG,mType+": "+responseString);
                     parseResponse(responseString);
                 }
             });
@@ -145,8 +147,8 @@ public class CommonFragment extends BaseFragment {
         } else {
 //            Toast.makeText(mActivity, "没有网络", Toast.LENGTH_SHORT).show();
             //TODO 加载数据库里的数据
+            Log.e(UrlUtils.TAG,"没有网！");
             RealmResults<CommonGoodForStore> goodList = realm.where(CommonGoodForStore.class).equalTo("type", mType.replaceAll("/","")).findAll();
-            Log.e(UrlUtils.TAG,""+goodList.size());
             if(goodList.size() >0){
                 List<Good> tempList = new ArrayList<>();
                 for(CommonGoodForStore g : goodList){
@@ -181,11 +183,10 @@ public class CommonFragment extends BaseFragment {
             object.setType(good.getType());
             object.setUrl(good.getUrl());
             object.setDesc(good.getDesc());
-            object.setObjectId(good.getObjectId());
+            object.setObjectId(good.get_id());
             object.setPublishedAt(good.getPublishedAt());
             object.setIsCollected(false);
             realm.copyToRealm(object);
-            Log.e(UrlUtils.TAG,object.getType() );
         }
         realm.commitTransaction();
         Log.e(UrlUtils.TAG,"保存成功！");

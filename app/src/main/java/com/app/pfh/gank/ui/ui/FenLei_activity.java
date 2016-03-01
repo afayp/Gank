@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,6 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -47,6 +50,7 @@ public class FenLei_activity extends AppCompatActivity {
     //viewpager和tablayout用到的fragment和tab标题
     private List<Fragment> mFragments = new ArrayList<Fragment>();
     private List<String> mTabTitles = new ArrayList<String>();
+    private CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,12 +117,13 @@ public class FenLei_activity extends AppCompatActivity {
         mTabLayout = (TabLayout) findViewById(R.id.id_fenlei_tab);
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
         mNavigationView = (NavigationView) findViewById(R.id.id_nav);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.id_FenLei_content);
 
         mToolbar.setTitle("分类浏览");
         setSupportActionBar(mToolbar);
         //设置左上角那个图标有用
         ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.mipmap.menu);//自己设置那个图标，这里用默认的
+        ab.setHomeAsUpIndicator(R.mipmap.menu);//自己设置那个图标，不然用默认的
         ab.setDisplayHomeAsUpEnabled(true);
         //下面设置点击图标展开navigation
         ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle(this,
@@ -139,7 +144,8 @@ public class FenLei_activity extends AppCompatActivity {
                 switch (item.getItemId()){
                     //待改进！
                     case R.id.nav_daily:
-                        Toast.makeText(FenLei_activity.this,"daily功能完善中" ,Toast.LENGTH_LONG).show();
+                        Snackbar.make(coordinatorLayout,"daily功能完善中",Snackbar.LENGTH_SHORT).show();
+//                        Toast.makeText(FenLei_activity.this,"daily功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_type:
                         Intent intent = new Intent(FenLei_activity.this, FenLei_activity.class);

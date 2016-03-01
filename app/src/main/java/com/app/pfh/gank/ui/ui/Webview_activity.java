@@ -7,8 +7,10 @@ import android.os.PersistableBundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.webkit.WebSettings;
@@ -18,6 +20,7 @@ import android.widget.ProgressBar;
 
 import com.app.pfh.gank.R;
 import com.app.pfh.gank.utils.HttpUtils;
+import com.app.pfh.gank.utils.UrlUtils;
 
 public class Webview_activity extends AppCompatActivity {
 
@@ -25,7 +28,6 @@ public class Webview_activity extends AppCompatActivity {
     private WebView mWebView;
     private String mUrl;
     private String mDesc;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private ProgressBar mProgressBar;
 
     @Override
@@ -70,7 +72,6 @@ public class Webview_activity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-//                mSwipeRefreshLayout.setRefreshing(false);
                 mProgressBar.setVisibility(View.INVISIBLE);
             }
 
@@ -87,7 +88,7 @@ public class Webview_activity extends AppCompatActivity {
         if (HttpUtils.isConnected(Webview_activity.this)) {
             mWebView.loadUrl(mUrl);
         } else {
-
+            //TODO
         }
     }
 
@@ -108,5 +109,16 @@ public class Webview_activity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.webview_toolbar_menu,menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                Log.e(UrlUtils.TAG,"点击了home");
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
