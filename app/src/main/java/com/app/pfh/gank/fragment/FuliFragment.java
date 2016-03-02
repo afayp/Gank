@@ -61,8 +61,8 @@ public class FuliFragment extends  BaseFragment{
                 super.onScrolled(recyclerView, dx, dy);
                 int lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
                 int totalItemCount = linearLayoutManager.getItemCount();
-                //剩下2个item加载更多，dy>0表示向下滑动
-                if (lastVisibleItemPosition >= totalItemCount - 2 && dy > 0) {
+                //剩下1个item加载更多，dy>0表示向下滑动
+                if (lastVisibleItemPosition >= totalItemCount - 1 && dy > 0) {
                     Log.e(UrlUtils.TAG, "要没啦" + isLoading);
                     if (isLoading) {
                         Toast.makeText(mActivity, "已经再加载了！", Toast.LENGTH_SHORT);
@@ -114,7 +114,6 @@ public class FuliFragment extends  BaseFragment{
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                    Log.e(UrlUtils.TAG, responseString);
                     parseResponse(responseString);
                 }
             });

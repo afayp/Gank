@@ -154,10 +154,12 @@ public class FenLei_activity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_collect:
-                        Toast.makeText(FenLei_activity.this,"collection功能完善中" ,Toast.LENGTH_LONG).show();
+                        Snackbar.make(coordinatorLayout, "collect功能完善中", Snackbar.LENGTH_SHORT).show();
+//                        Toast.makeText(FenLei_activity.this,"collection功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_setting:
-                        Toast.makeText(FenLei_activity.this,"setting功能完善中" ,Toast.LENGTH_LONG).show();
+                        Snackbar.make(coordinatorLayout, "setting功能完善中", Snackbar.LENGTH_SHORT).show();
+//                        Toast.makeText(FenLei_activity.this,"setting功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_info:
                         showAboutWindow();

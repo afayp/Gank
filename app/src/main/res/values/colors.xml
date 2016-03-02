@@ -6,4 +6,5 @@
     <color name="item_title_color">#2852be</color>
     <color name="item_bg_normal">#ffffff</color>
     <color name="about_bg">#BFBFBF</color>
+    <color name="snackbar">#1a50d9</color>
 </resources>

@@ -74,6 +74,7 @@ public class CommonFragment extends BaseFragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        mSwipeRefreshLayout.setRefreshing(true);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -106,9 +107,9 @@ public class CommonFragment extends BaseFragment {
             @Override
             public void onItemClick(Good good) {
                 //TODO
-                Log.e(UrlUtils.TAG,good.toString());
+                Log.e(UrlUtils.TAG, good.toString());
                 Intent intent = new Intent(mActivity, Webview_activity.class);
-                intent.putExtra("desc" ,good.getDesc());
+                intent.putExtra("desc", good.getDesc());
                 intent.putExtra("url", good.getUrl());
                 startActivity(intent);
             }
@@ -128,7 +129,6 @@ public class CommonFragment extends BaseFragment {
     }
 
     private void loadData(final int page) {
-        mSwipeRefreshLayout.setRefreshing(true);
         if (HttpUtils.isConnected(mActivity)) {
             Log.e(UrlUtils.TAG,"有网！");
             HttpUtils.get(UrlUtils.getFenLeiUrl(mType, page), new TextHttpResponseHandler() {
@@ -145,20 +145,20 @@ public class CommonFragment extends BaseFragment {
             });
 
         } else {
-//            Toast.makeText(mActivity, "没有网络", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, "没有网络", Toast.LENGTH_SHORT).show();
             //TODO 加载数据库里的数据
-            Log.e(UrlUtils.TAG,"没有网！");
-            RealmResults<CommonGoodForStore> goodList = realm.where(CommonGoodForStore.class).equalTo("type", mType.replaceAll("/","")).findAll();
-            if(goodList.size() >0){
-                List<Good> tempList = new ArrayList<>();
-                for(CommonGoodForStore g : goodList){
-                    Good good = new Good(g.getWho(),g.getPublishedAt(),g.getDesc(),g.getType(),g.getUrl(),g.getObjectId());
-                    tempList.add(good);
-                }
-                commonAdapter.addData(tempList);
-            }else {
-                Toast.makeText(mActivity,"没有网也没有存货啦",Toast.LENGTH_SHORT).show();
-            }
+//            Log.e(UrlUtils.TAG,"没有网！");
+//            RealmResults<CommonGoodForStore> goodList = realm.where(CommonGoodForStore.class).equalTo("type", mType.replaceAll("/","")).findAll();
+//            if(goodList.size() >0){
+//                List<Good> tempList = new ArrayList<>();
+//                for(CommonGoodForStore g : goodList){
+//                    Good good = new Good(g.getWho(),g.getPublishedAt(),g.getDesc(),g.getType(),g.getUrl(),g.getObjectId());
+//                    tempList.add(good);
+//                }
+//                commonAdapter.addData(tempList);
+//            }else {
+//                Toast.makeText(mActivity,"没有网也没有存货啦",Toast.LENGTH_SHORT).show();
+//            }
             mSwipeRefreshLayout.setRefreshing(false);
         }
     }
@@ -176,20 +176,20 @@ public class CommonFragment extends BaseFragment {
         List<Good> goodList = fenLeiData.getResults();
         commonAdapter.addData(goodList);
         mSwipeRefreshLayout.setRefreshing(false);
-        realm.beginTransaction();
-        for(Good good : goodList){
-            CommonGoodForStore object = new CommonGoodForStore();
-            object.setWho(good.getWho());
-            object.setType(good.getType());
-            object.setUrl(good.getUrl());
-            object.setDesc(good.getDesc());
-            object.setObjectId(good.get_id());
-            object.setPublishedAt(good.getPublishedAt());
-            object.setIsCollected(false);
-            realm.copyToRealm(object);
-        }
-        realm.commitTransaction();
-        Log.e(UrlUtils.TAG,"保存成功！");
+//        realm.beginTransaction();
+//        for(Good good : goodList){
+//            CommonGoodForStore object = new CommonGoodForStore();
+//            object.setWho(good.getWho());
+//            object.setType(good.getType());
+//            object.setUrl(good.getUrl());
+//            object.setDesc(good.getDesc());
+//            object.setObjectId(good.get_id());
+//            object.setPublishedAt(good.getPublishedAt());
+//            object.setIsCollected(false);
+//            realm.copyToRealm(object);
+//        }
+//        realm.commitTransaction();
+//        Log.e(UrlUtils.TAG,"保存成功！");
     }
 
     @Override
