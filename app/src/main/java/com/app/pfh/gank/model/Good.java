@@ -1,10 +1,9 @@
 package com.app.pfh.gank.model;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
+import java.io.Serializable;
 
-public class Good {
+public class Good implements Serializable {
 
 //            "who":"Jason",
 //            "publishedAt":"2015-08-21T04:09:13.777Z",
@@ -129,19 +128,19 @@ public class Good {
         this.createdAt = createdAt;
     }
 
-
-//    @Override
-//    public String toString() {
-//        return "Good{" +
-//                "who='" + who + '\'' +
-//                ", publishedAt='" + publishedAt + '\'' +
-//                ", desc='" + desc + '\'' +
-//                ", type='" + type + '\'' +
-//                ", url='" + url + '\'' +
-//                ", used=" + used +
-//                ", _id='" + _id + '\'' +
-//                ", createdAt='" + createdAt + '\'' +
-//                ", updatedAt='" + updatedAt + '\'' +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Good{" +
+                "who='" + who + '\'' +
+                ", publishedAt='" + publishedAt + '\'' +
+                ", desc='" + desc + '\'' +
+                ", type='" + type + '\'' +
+                ", url='" + url + '\'' +
+                ", used=" + used +
+                ", _id='" + _id + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", _ns='" + _ns + '\'' +
+                ", source='" + source + '\'' +
+                '}';
+    }
 }

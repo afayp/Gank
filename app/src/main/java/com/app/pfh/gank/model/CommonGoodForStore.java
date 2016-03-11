@@ -1,10 +1,7 @@
 package com.app.pfh.gank.model;
 
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
-
-public class CommonGoodForStore extends RealmObject{
+public class CommonGoodForStore {
 
     private String objectId;
     private String who;

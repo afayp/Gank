@@ -1,7 +1,10 @@
 package com.app.pfh.gank.fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Toast;
 
 import com.app.pfh.gank.R;
 import com.app.pfh.gank.adapter.CommonAdapter;
+import com.app.pfh.gank.db.DBHelper;
+import com.app.pfh.gank.db.Dao;
 import com.app.pfh.gank.model.CommonGoodForStore;
 import com.app.pfh.gank.model.FenLeiData;
 import com.app.pfh.gank.model.Good;
@@ -27,10 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmQuery;
-import io.realm.RealmResults;
+import me.drakeet.materialdialog.MaterialDialog;
 
 /**
  * 分类下除了福利外的fragment
@@ -44,7 +47,6 @@ public class CommonFragment extends BaseFragment {
     private int mCurrentPage;
     private LinearLayoutManager linearLayoutManager;
     private boolean isLoading;
-    private Realm realm;
 
 
     public static CommonFragment newInstance(String type) {
@@ -61,7 +63,6 @@ public class CommonFragment extends BaseFragment {
         //拿从activity传过来的数据
         mType = getArguments().getString("TYPE");
         mCurrentPage = 1;
-        realm = Realm.getDefaultInstance();
 
     }
 
@@ -109,9 +110,52 @@ public class CommonFragment extends BaseFragment {
                 //TODO
                 Log.e(UrlUtils.TAG, good.toString());
                 Intent intent = new Intent(mActivity, Webview_activity.class);
-                intent.putExtra("desc", good.getDesc());
-                intent.putExtra("url", good.getUrl());
+//                intent.putExtra("desc", good.getDesc());
+//                intent.putExtra("url", good.getUrl());
+                intent.putExtra("good",good);
                 startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(final Good good) {
+
+                final MaterialDialog materialDialog = new MaterialDialog(mActivity);
+                materialDialog.setTitle("提示");
+                materialDialog.setMessage("确定收藏吗");
+                materialDialog.setPositiveButton("取消", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        materialDialog.dismiss();
+
+                    }
+                });
+                materialDialog.setNegativeButton("收藏", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(good.get_id() != null){
+                            DBHelper dbHelper = new DBHelper(mActivity);
+                            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                            Dao dao = Dao.getInstance(mActivity);
+                            if(!dao.isExists(good)){
+                                db.execSQL("INSERT INTO Good VALUES(" +
+                                        "'" + good.get_id() + "'," +
+                                        "'" + good.getWho() + "'," +
+                                        "'" + good.getPublishedAt() + "'," +
+                                        "'" + good.getDesc() + "'," +
+                                        "'" + good.getType() + "'," +
+                                        "'" + good.getUrl() + "'"
+                                        + ")");
+                                db.close();
+                                Toast.makeText(mActivity,"收藏成功！",Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(mActivity,"已收藏！",Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+                        materialDialog.dismiss();
+                    }
+                });
+                materialDialog.show();
             }
         });
         return view;
@@ -130,7 +174,6 @@ public class CommonFragment extends BaseFragment {
 
     private void loadData(final int page) {
         if (HttpUtils.isConnected(mActivity)) {
-            Log.e(UrlUtils.TAG,"有网！");
             HttpUtils.get(UrlUtils.getFenLeiUrl(mType, page), new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -146,19 +189,14 @@ public class CommonFragment extends BaseFragment {
 
         } else {
             Toast.makeText(mActivity, "没有网络", Toast.LENGTH_SHORT).show();
-            //TODO 加载数据库里的数据
-//            Log.e(UrlUtils.TAG,"没有网！");
-//            RealmResults<CommonGoodForStore> goodList = realm.where(CommonGoodForStore.class).equalTo("type", mType.replaceAll("/","")).findAll();
-//            if(goodList.size() >0){
-//                List<Good> tempList = new ArrayList<>();
-//                for(CommonGoodForStore g : goodList){
-//                    Good good = new Good(g.getWho(),g.getPublishedAt(),g.getDesc(),g.getType(),g.getUrl(),g.getObjectId());
-//                    tempList.add(good);
-//                }
-//                commonAdapter.addData(tempList);
-//            }else {
-//                Toast.makeText(mActivity,"没有网也没有存货啦",Toast.LENGTH_SHORT).show();
+//            DBHelper dbHelper = new DBHelper(mActivity);
+//            SQLiteDatabase db = dbHelper.getWritableDatabase();
+//            Cursor cursor = db.rawQuery("SELECT jsonText FROM Good", null);
+//            while (cursor.moveToNext()){
+//                String response = cursor.getString(cursor.getColumnIndex("josnText"));
+//
 //            }
+//            db.close();
             mSwipeRefreshLayout.setRefreshing(false);
         }
     }
@@ -176,27 +214,17 @@ public class CommonFragment extends BaseFragment {
         List<Good> goodList = fenLeiData.getResults();
         commonAdapter.addData(goodList);
         mSwipeRefreshLayout.setRefreshing(false);
-//        realm.beginTransaction();
-//        for(Good good : goodList){
-//            CommonGoodForStore object = new CommonGoodForStore();
-//            object.setWho(good.getWho());
-//            object.setType(good.getType());
-//            object.setUrl(good.getUrl());
-//            object.setDesc(good.getDesc());
-//            object.setObjectId(good.get_id());
-//            object.setPublishedAt(good.getPublishedAt());
-//            object.setIsCollected(false);
-//            realm.copyToRealm(object);
-//        }
-//        realm.commitTransaction();
-//        Log.e(UrlUtils.TAG,"保存成功！");
+        //保存到数据库
+//        DBHelper dbHelper = new DBHelper(mActivity);
+//        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//        String sql = "INSERT INTO Good(jsonText) VALUES(" + "'"+ responseString + "')";
+//        db.execSQL(sql);
+//        db.close();
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(realm != null){
-            realm.close();
-        }
     }
 }

@@ -14,39 +14,41 @@ import com.app.pfh.gank.model.Good;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.MyViewHolder>{
+public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.MyViewHolder> {
 
 
     private List<Good> mGoodList;
     private Context mContext;
     private OnItemClickListener onItemClickListener;
 
-    public CommonAdapter(Context context){
+    public CommonAdapter(Context context) {
         mGoodList = new ArrayList<Good>();
         mContext = context;
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(Good good);
+
+        void onItemLongClick(Good good);
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
 
-    public void addData(List<Good> goodList){
+    public void addData(List<Good> goodList) {
         mGoodList.addAll(goodList);
         notifyDataSetChanged();
     }
 
-    public void refreshData(List<Good> goodList){
+    public void refreshData(List<Good> goodList) {
         mGoodList.clear();
         mGoodList.addAll(goodList);
         notifyDataSetChanged();
     }
 
-    public void removeData(){
+    public void removeData() {
         mGoodList.clear();
         notifyDataSetChanged();
     }
@@ -55,13 +57,22 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final MyViewHolder holder = new MyViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_common, parent, false));
-        if(onItemClickListener != null){
+        if (onItemClickListener != null) {
             holder.item_linearlayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = holder.getLayoutPosition();
                     Good good = mGoodList.get(position);
                     onItemClickListener.onItemClick(good);
+                }
+            });
+            holder.item_linearlayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = holder.getLayoutPosition();
+                    Good good = mGoodList.get(position);
+                    onItemClickListener.onItemLongClick(good);
+                    return true;
                 }
             });
         }
@@ -71,14 +82,16 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Good good = mGoodList.get(position);
+//        if(good.get_id() != null){
         holder.tv_title.setText(good.getDesc());
         holder.tv_time.setText(getTime(good));
         holder.tv_author.setText(good.getWho());
+//        }
     }
 
     private String getTime(Good good) {
         String str = good.getPublishedAt();
-        return str.substring(0,10);
+        return str.substring(0, 10);
     }
 
     @Override
@@ -86,7 +99,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.MyViewHold
         return mGoodList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
         View item_linearlayout;
         TextView tv_title;
         TextView tv_time;

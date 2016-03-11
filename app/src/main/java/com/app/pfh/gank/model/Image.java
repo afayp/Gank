@@ -2,15 +2,12 @@ package com.app.pfh.gank.model;
 
 import android.graphics.Bitmap;
 
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 /**
  * 图片类，用于保存
  */
-public class Image extends RealmObject{
+public class Image {
 
-    @PrimaryKey
     private String id;
     private  String author;
     private String time;

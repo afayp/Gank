@@ -101,7 +101,6 @@ public class FenLei_activity extends AppCompatActivity {
                 return mTabTitles.get(position);
             }
         });
-
     }
 
     private void initTabLayout() {
@@ -140,9 +139,7 @@ public class FenLei_activity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 item.setCheckable(true);
-                mDrawerLayout.closeDrawers();
                 switch (item.getItemId()){
-                    //待改进！
                     case R.id.nav_daily:
                         Snackbar.make(coordinatorLayout,"daily功能完善中",Snackbar.LENGTH_SHORT).show();
 //                        Toast.makeText(FenLei_activity.this,"daily功能完善中" ,Toast.LENGTH_LONG).show();
@@ -154,7 +151,11 @@ public class FenLei_activity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_collect:
-                        Snackbar.make(coordinatorLayout, "collect功能完善中", Snackbar.LENGTH_SHORT).show();
+//                        Snackbar.make(coordinatorLayout, "collect功能完善中", Snackbar.LENGTH_SHORT).show();
+                        Intent intent1 = new Intent(FenLei_activity.this, Collection_activity.class);
+                        startActivity(intent1);
+                        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+//                        finish();
 //                        Toast.makeText(FenLei_activity.this,"collection功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_setting:
@@ -165,7 +166,7 @@ public class FenLei_activity extends AppCompatActivity {
                         showAboutWindow();
                         break;
                 }
-
+                mDrawerLayout.closeDrawers();
                 return true;
             }
         });

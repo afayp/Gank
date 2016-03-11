@@ -34,6 +34,7 @@
         <activity
             android:name=".ui.ui.Fuli_viewer_activity"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.ui.Collection_activity"/>
     </application>
 
 </manifest>

@@ -15,8 +15,6 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.File;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 /**
  * 全局context，requestqueue
@@ -32,8 +30,6 @@ public class GankApplication extends Application{
         context = getApplicationContext();
         requestQueue = Volley.newRequestQueue(context);
         initImageLoader(context);
-        RealmConfiguration config = new RealmConfiguration.Builder(getApplicationContext()).build();
-        Realm.setDefaultConfiguration(config);
     }
 
     private void initImageLoader(Context context) {
