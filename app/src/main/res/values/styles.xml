@@ -1,11 +1,37 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="item_title_color">@color/item_title_color</item>
+        <item name="mytabIndicatorColor">@color/mytabIndicatorColor_blue</item>
+
     </style>
+
+    <style name="AppThemeRed" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryRed</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkRed</item>
+        <item name="colorAccent">@color/colorAccentRed</item>
+        <item name="item_title_color">@color/item_title_color_red</item>
+        <item name="mytabIndicatorColor">@color/mytabIndicatorColor_red</item>
+
+
+    </style>
+
+    <style name="AppThemePurple" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryPurple</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkPurple</item>
+        <item name="colorAccent">@color/colorAccentRed</item>
+        <item name="item_title_color">@color/item_title_color_purple</item>
+        <item name="mytabIndicatorColor">@color/mytabIndicatorColor_purple</item>
+
+
+    </style>
+
 
 </resources>

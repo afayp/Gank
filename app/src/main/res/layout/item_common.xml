@@ -23,7 +23,7 @@
             android:id="@+id/txt_goods_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/item_title_color"
+            android:textColor="?attr/item_title_color"
             android:text="git教程"
             android:textSize="18sp"
             />

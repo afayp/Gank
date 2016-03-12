@@ -80,7 +80,6 @@ public class CommonFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 refresh();
-                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
         linearLayoutManager = new LinearLayoutManager(mActivity);
@@ -165,6 +164,8 @@ public class CommonFragment extends BaseFragment {
         mCurrentPage = 1;
         commonAdapter.removeData();
         loadData(mCurrentPage);
+        mSwipeRefreshLayout.setRefreshing(false);
+
     }
 
     @Override
@@ -197,8 +198,8 @@ public class CommonFragment extends BaseFragment {
 //
 //            }
 //            db.close();
-            mSwipeRefreshLayout.setRefreshing(false);
         }
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     private void loadMore() {

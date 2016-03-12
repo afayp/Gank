@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -32,6 +33,8 @@ import com.app.pfh.gank.GankApplication;
 import com.app.pfh.gank.R;
 import com.app.pfh.gank.fragment.CommonFragment;
 import com.app.pfh.gank.fragment.FuliFragment;
+import com.app.pfh.gank.utils.PrefsUtils;
+import com.app.pfh.gank.utils.SnackBarUtils;
 import com.app.pfh.gank.utils.UrlUtils;
 
 import java.util.ArrayList;
@@ -51,10 +54,25 @@ public class FenLei_activity extends AppCompatActivity {
     private List<Fragment> mFragments = new ArrayList<Fragment>();
     private List<String> mTabTitles = new ArrayList<String>();
     private CoordinatorLayout coordinatorLayout;
+    private long exitTime= 0;
+    private int snackBg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int themeId = PrefsUtils.getThemeId(this);
+        switch (themeId){
+            case PrefsUtils.THEMEID_BLUE:
+                setTheme(R.style.AppThemeBlue);
+                break;
+            case PrefsUtils.THEMEID_PURPLE:
+                setTheme(R.style.AppThemePurple);
+                break;
+            case PrefsUtils.THEMEID_RED:
+                setTheme(R.style.AppThemeRed);
+                break;
+        }
         setContentView(R.layout.activity_fenlei);
         initViews();
         //监听navigation里面的menuitem
@@ -118,11 +136,11 @@ public class FenLei_activity extends AppCompatActivity {
         mNavigationView = (NavigationView) findViewById(R.id.id_nav);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.id_FenLei_content);
 
-        mToolbar.setTitle("分类浏览");
+        mToolbar.setTitle("Gank.io");
         setSupportActionBar(mToolbar);
         //设置左上角那个图标有用
         ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.mipmap.menu);//自己设置那个图标，不然用默认的
+//        ab.setHomeAsUpIndicator(R.mipmap.menu_white);//自己设置那个图标，不然用默认的
         ab.setDisplayHomeAsUpEnabled(true);
         //下面设置点击图标展开navigation
         ActionBarDrawerToggle mActionBarDrawerToggle = new ActionBarDrawerToggle(this,
@@ -142,7 +160,6 @@ public class FenLei_activity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.nav_daily:
                         Snackbar.make(coordinatorLayout,"daily功能完善中",Snackbar.LENGTH_SHORT).show();
-//                        Toast.makeText(FenLei_activity.this,"daily功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_type:
                         Intent intent = new Intent(FenLei_activity.this, FenLei_activity.class);
@@ -151,16 +168,18 @@ public class FenLei_activity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.nav_collect:
-//                        Snackbar.make(coordinatorLayout, "collect功能完善中", Snackbar.LENGTH_SHORT).show();
                         Intent intent1 = new Intent(FenLei_activity.this, Collection_activity.class);
                         startActivity(intent1);
                         overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
 //                        finish();
-//                        Toast.makeText(FenLei_activity.this,"collection功能完善中" ,Toast.LENGTH_LONG).show();
                         break;
                     case R.id.nav_setting:
-                        Snackbar.make(coordinatorLayout, "setting功能完善中", Snackbar.LENGTH_SHORT).show();
-//                        Toast.makeText(FenLei_activity.this,"setting功能完善中" ,Toast.LENGTH_LONG).show();
+                        Intent intent2 = new Intent(FenLei_activity.this, Setting_activity.class);
+                        startActivity(intent2);
+                        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                        finish();
+
+//                        Snackbar.make(coordinatorLayout, "setting功能完善中", Snackbar.LENGTH_SHORT).show();
                         break;
                     case R.id.nav_info:
                         showAboutWindow();
@@ -210,5 +229,19 @@ public class FenLei_activity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         GankApplication.getRequestQueue().cancelAll("VolleyGet");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawers();
+            return;
+        }
+        if((System.currentTimeMillis()-exitTime) > 2000){
+            Snackbar.make(coordinatorLayout, "再按一次退出！", Snackbar.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }

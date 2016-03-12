@@ -21,6 +21,7 @@ import com.app.pfh.gank.adapter.CommonAdapter;
 import com.app.pfh.gank.db.DBHelper;
 import com.app.pfh.gank.db.Dao;
 import com.app.pfh.gank.model.Good;
+import com.app.pfh.gank.utils.PrefsUtils;
 import com.app.pfh.gank.utils.UrlUtils;
 
 import java.util.ArrayList;
@@ -40,6 +41,18 @@ public class Collection_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int themeId = PrefsUtils.getThemeId(this);
+        switch (themeId){
+            case PrefsUtils.THEMEID_BLUE:
+                setTheme(R.style.AppThemeBlue);
+                break;
+            case PrefsUtils.THEMEID_PURPLE:
+                setTheme(R.style.AppThemePurple);
+                break;
+            case PrefsUtils.THEMEID_RED:
+                setTheme(R.style.AppThemeRed);
+                break;
+        }
         setContentView(R.layout.activity_collection);
         mToolbar = (Toolbar) findViewById(R.id.collection_toolbar);
         mToolbar.setTitle("收藏");
@@ -142,14 +155,5 @@ public class Collection_activity extends AppCompatActivity {
         Log.e("Gank", "initData 拿到数据" + goodList.get(0).toString());
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.collection_context_menu, menu);
-    }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        return super.onContextItemSelected(item);
-    }
 }
