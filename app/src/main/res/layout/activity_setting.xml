@@ -6,31 +6,20 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/setting_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:titleTextColor="@android:color/white" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="基本"
-        android:textSize="18sp"
-        android:layout_margin="10dp"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@android:color/black"
-        android:layout_margin="5dp"/>
-    <TextView
-        android:id="@+id/change_theme"
+    android:id="@+id/setting_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:titleTextColor="@android:color/white" />
+
+    <com.app.pfh.gank.view.MyItemSelectView
+        android:id="@+id/theme_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="主题"
-        android:textSize="22sp"
-        android:layout_margin="15dp"/>
+        app:itemselectview_title="更换主题"
+        app:itemselectview_desc = ""/>
 
 
 </LinearLayout>

@@ -30,7 +30,7 @@
  * https://github.com/MikeOrtiz/TouchImageView/blob/master/src/com/ortiz/touch/TouchImageView.java
  */
 
-package com.app.pfh.gank;
+package com.app.pfh.gank.view;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

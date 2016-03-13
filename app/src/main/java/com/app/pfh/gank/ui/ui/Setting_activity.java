@@ -12,15 +12,16 @@ import android.widget.TextView;
 
 import com.app.pfh.gank.R;
 import com.app.pfh.gank.utils.PrefsUtils;
+import com.app.pfh.gank.view.MyItemSelectView;
 
 import me.drakeet.materialdialog.MaterialDialog;
 
 public class Setting_activity extends AppCompatActivity {
 
     private Toolbar mToolbar;
-    private TextView tv_change_theme;
     private int themeId;
     private MaterialDialog materialDialog;
+    private MyItemSelectView theme_setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class Setting_activity extends AppCompatActivity {
 
     private void initView() {
         mToolbar = (Toolbar) findViewById(R.id.setting_toolbar);
-        tv_change_theme = (TextView) findViewById(R.id.change_theme);
+        theme_setting = (MyItemSelectView) findViewById(R.id.theme_setting);
         mToolbar.setTitle("设置");
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
@@ -59,7 +60,7 @@ public class Setting_activity extends AppCompatActivity {
             }
         });
 
-        tv_change_theme.setOnClickListener(new View.OnClickListener() {
+        theme_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showChangeThemeDialog();

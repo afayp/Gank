@@ -2,4 +2,10 @@
 <resources>
     <attr name="item_title_color" format="color"/>
     <attr name="mytabIndicatorColor" format="color"/>
+
+    <declare-styleable name="MyCustomView">
+        <attr name="itemselectview_title" format="string|reference"/>
+        <attr name="itemselectview_desc" format="string|reference"/>
+    </declare-styleable>
+
 </resources>

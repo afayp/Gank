@@ -3,14 +3,12 @@ package com.app.pfh.gank.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.pfh.gank.R;
-import com.app.pfh.gank.TouchImageView;
-import com.app.pfh.gank.utils.UrlUtils;
+import com.app.pfh.gank.view.TouchImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
