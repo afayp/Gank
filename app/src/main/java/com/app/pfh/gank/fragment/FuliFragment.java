@@ -109,7 +109,7 @@ public class FuliFragment extends  BaseFragment{
             HttpUtils.get(UrlUtils.getFenLeiUrl(UrlUtils.fuli, page), new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                    Log.e(UrlUtils.TAG, "Fuli加载json数据失败"+"url:"+UrlUtils.getFenLeiUrl(UrlUtils.fuli, page)+"response:"+responseString);
+                    Log.e(UrlUtils.TAG, "Fuli加载json数据失败"+"url:"+UrlUtils.getFenLeiUrl(UrlUtils.fuli, page)+" response:"+responseString);
                 }
 
                 @Override

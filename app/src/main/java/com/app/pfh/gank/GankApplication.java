@@ -16,9 +16,7 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 import java.io.File;
 
 
-/**
- * 全局context，requestqueue
- */
+
 public class GankApplication extends Application{
     private static Context context;
     private static RequestQueue requestQueue;
@@ -37,11 +35,12 @@ public class GankApplication extends Application{
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(context)
                 .threadPoolSize(5)
                 .threadPriority(Thread.NORM_PRIORITY - 1)
-                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+                .memoryCache(new LruMemoryCache(3 * 1024 * 1024))
                 .denyCacheImageMultipleSizesInMemory()
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .diskCache(new UnlimitedDiskCache(cacheDir))
+                .diskCacheFileCount(100)
                 .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(configuration);

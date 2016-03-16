@@ -14,6 +14,7 @@ import com.app.pfh.gank.R;
 import com.app.pfh.gank.model.Good;
 import com.app.pfh.gank.utils.ScreenUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
@@ -83,8 +84,10 @@ public class FuliAdapter extends RecyclerView.Adapter<FuliAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Good good = mFuliList.get(position);
-        ImageSize imageSize = new ImageSize(ScreenUtils.getScreenWidth(mContext), 100);
+//        ImageSize imageSize = new ImageSize(ScreenUtils.getScreenWidth(mContext), 100);
         mImageloader.displayImage(good.getUrl(), holder.imageView,options);
+//        Glide.with(mContext).load(good.getUrl()).error(R.drawable.item_default_img).override(500,400)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imageView);
     }
 
     @Override

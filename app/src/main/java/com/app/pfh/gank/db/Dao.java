@@ -78,7 +78,7 @@ public class Dao {
     }
 
     public void deleteGood(Good good){
-        db.execSQL("delete from Good where _id = "+"'" + good.get_id() + "'");
+        db.execSQL("delete from Good where _id = " + "'" + good.get_id() + "'");
 
     }
 
